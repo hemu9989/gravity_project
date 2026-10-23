@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="nebula">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AETHERIA — Welcome to the Next Horizon</title>
+  <meta name="description" content="Experience an ultra-modern, interactive welcome portal featuring dynamic particle graphics, 3D holographic visuals, and ambient soundscapes.">
+  <meta name="theme-color" content="#07090e">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="AETHERIA — Welcome to the Next Horizon">
+  <meta property="og:description" content="An ultra-modern, interactive welcome portal with dynamic graphics and ambient physics.">
+  
+  <!-- Google Fonts Preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Dynamic Interactive Particle Canvas -->
+  <canvas id="constellation-canvas" aria-hidden="true"></canvas>
+
+  <!-- Ambient Color Auras -->
+  <div class="ambient-glow top-right" aria-hidden="true"></div>
+  <div class="ambient-glow bottom-left" aria-hidden="true"></div>
+  <div class="ambient-glow center-pointer" id="mouse-glow" aria-hidden="true"></div>
+
+  <!-- Header Navigation -->
+  <header class="site-header">
+    <div class="header-container">
+      <a href="#hero" class="brand-badge" id="brand-logo" aria-label="Aetheria Home">
+        <div class="brand-symbol">
+          <svg viewBox="0 0 24 24">
+            <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+            <polyline points="2 17 12 22 22 17"></polyline>
+            <polyline points="2 12 12 17 22 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <span class="brand-name">AETHERIA</span>
+          <span class="brand-tag">v2.4 Live</span>
+        </div>
+      </a>
+
+      <div class="header-actions">
+        <!-- Interactive Theme Switcher -->
+        <div class="theme-selector" role="group" aria-label="Theme selector">
+          <button class="theme-pill active" data-set="nebula" title="Nebula Theme" id="theme-btn-nebula" aria-label="Nebula Theme"></button>
+          <button class="theme-pill" data-set="solar" title="Solar Flare Theme" id="theme-btn-solar" aria-label="Solar Theme"></button>
+          <button class="theme-pill" data-set="emerald" title="Aurora Emerald Theme" id="theme-btn-emerald" aria-label="Emerald Theme"></button>
+          <button class="theme-pill" data-set="cyber" title="Cyberpunk Theme" id="theme-btn-cyber" aria-label="Cyber Theme"></button>
+        </div>
+
+        <!-- Ambient Sound Toggle -->
+        <button class="audio-btn" id="audio-toggle-btn" aria-label="Toggle ambient chime synthesis">
+          <div class="soundwave-bars">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+          </div>
+          <span id="audio-btn-text">Audio FX</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="main-wrapper">
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-title-heading">
+      <div class="hero-content">
+        <!-- Time-based Greeting & Status Pill -->
+        <div class="welcome-pill">
+          <span class="status-dot"></span>
+          <span class="time-greeting" id="greeting-badge">Welcome Explorer</span>
+          <span class="clock-display" id="live-clock">--:--:--</span>
+        </div>
+
+        <!-- Main Title -->
+        <h1 class="hero-title" id="hero-title-heading">
+          Hello, <span class="user-personalized" id="display-user-name" title="Click to customize name">Explorer</span>!
+          <span class="gradient-text">Welcome to the Horizon.</span>
+        </h1>
+
+        <!-- Engaging Subtitle -->
+        <p class="hero-description">
+          Step into a responsive sensory environment crafted with generative graphics, real-time particle dynamics, and fluid physics. Move your cursor, interact with the visuals, or personalize your stay.
+        </p>
+
+        <!-- Personalization Input Form -->
+        <form class="personalize-box" id="name-form" onsubmit="return false;">
+          <svg viewBox="0 0 24 24">
+            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle>
+          </svg>
+          <input 
+            type="text" 
+            id="user-name-input" 
+            placeholder="Type your name to personalize..." 
+            autocomplete="off"
+            maxlength="24"
+            aria-label="Your Name"
+          >
+          <button type="submit" class="btn-personalize" id="update-name-btn">Greet Me</button>
+        </form>
+
+        <!-- Call to Actions -->
+        <div class="hero-cta-cluster">
+          <a href="#showcase" class="primary-btn" id="explore-cta-btn">
+            <span>Explore Graphics</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M5 12h14M12 5l7 7-7 7"/>
+            </svg>
+          </a>
+          <button class="secondary-btn" id="nova-pulse-hero-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+            <span>Trigger Nova Burst</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Hero Visual Showcase Stage with 3D Tilt Card -->
+      <div class="hero-visual">
+        <div class="visual-stage">
+          <!-- Animated Orbital Rings -->
+          <div class="orbit-ring outer" aria-hidden="true"></div>
+          <div class="orbit-ring middle" aria-hidden="true"></div>
+
+          <!-- Floating HUD Information Badges -->
+          <div class="hud-badge top-left">
+            <div class="hud-icon">
+              <svg viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="m4.93 4.93 4.24 4.24"></path>
+                <path d="m14.83 9.17 4.24-4.24"></path>
+                <path d="m14.83 14.83 4.24 4.24"></path>
+                <path d="m9.17 14.83-4.24 4.24"></path>
+                <circle cx="12" cy="12" r="4"></circle>
+              </svg>
+            </div>
+            <div class="hud-content">
+              <span class="hud-label">Rendering Mode</span>
+              <span class="hud-value">Volumetric 8K Orb</span>
+            </div>
+          </div>
+
+          <div class="hud-badge bottom-right">
+            <div class="hud-icon">
+              <svg viewBox="0 0 24 24">
+                <path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <div class="hud-content">
+              <span class="hud-label">Interactive Physics</span>
+              <span class="hud-value" id="hud-particles-counter">120 Particles Active</span>
+            </div>
+          </div>
+
+          <!-- 3D Interactive Tilt Card -->
+          <div class="tilt-card" id="hero-tilt-card" tabindex="0" role="region" aria-label="Interactive 3D Holographic Visual Card">
+            <div class="graphic-image-wrapper">
+              <img 
+                src="assets/hero_orb.jpg" 
+                alt="A futuristic luminous 3D iridescent glass sphere with glowing orbital rings" 
+                class="hero-img" 
+                id="hero-img-element"
+              />
+              <div class="specular-glare" id="specular-glare" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Experience Metrics Banner -->
+    <section class="metrics-strip" aria-label="System Metrics">
+      <div class="metric-item">
+        <span class="metric-number" id="fps-display">60</span>
+        <span class="metric-label">Target Refresh Rate</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-number" id="metric-particles">120</span>
+        <span class="metric-label">Reactive Starlets</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-number" id="metric-interaction">0</span>
+        <span class="metric-label">Interactions Logged</span>
+      </div>
+      <div class="metric-item">
+        <span class="metric-number">0.4ms</span>
+        <span class="metric-label">Render Latency</span>
+      </div>
+    </section>
+
+    <!-- Showcase Cards Grid -->
+    <section class="showcase-section" id="showcase" aria-labelledby="showcase-title">
+      <div class="section-header">
+        <span class="section-tag">Interactive Graphics Engine</span>
+        <h2 class="section-title" id="showcase-title">Explore the Graphic Dimensions</h2>
+        <p>Each card controls real-time graphical parameters and procedural audio synthesis directly in your browser.</p>
+      </div>
+
+      <div class="cards-grid">
+        <!-- Feature 1: Particle Constellation -->
+        <article class="feature-card" id="feature-card-constellation">
+          <div class="card-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <circle cx="12" cy="12" r="3"></circle>
+              <line x1="12" y1="2" x2="12" y2="6"></line>
+              <line x1="12" y1="18" x2="12" y2="22"></line>
+              <line x1="4.93" y1="4.93" x2="7.76" y2="7.76"></line>
+              <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"></line>
+              <line x1="2" y1="12" x2="6" y2="12"></line>
+              <line x1="18" y1="12" x2="22" y2="12"></line>
+              <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"></line>
+              <line x1="16.24" y1="7.76" x2="19.07" y2="4.93"></line>
+            </svg>
+          </div>
+          <h3>Reactive Star Constellation</h3>
+          <p>Real-time Canvas-rendered particles that react to cursor proximity with inverse-square repulsion and luminous proximity linking.</p>
+          <div class="interactive-widget">
+            <button class="widget-btn" id="btn-toggle-gravity">
+              <span>Toggle Gravity</span>
+            </button>
+            <span class="widget-metric" id="gravity-status">Float Mode</span>
+          </div>
+        </article>
+
+        <!-- Feature 2: Holographic Optical Sheen -->
+        <article class="feature-card" id="feature-card-optics">
+          <div class="card-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"></path>
+              <circle cx="12" cy="12" r="3"></circle>
+            </svg>
+          </div>
+          <h3>Chromatic & 3D Parallax</h3>
+          <p>Interactive 3D transform matrix paired with mouse tracking and dynamic specular sheen calculation for ultra-realistic tactile feedback.</p>
+          <div class="interactive-widget">
+            <button class="widget-btn" id="btn-tilt-invert">
+              <span>Invert Perspective</span>
+            </button>
+            <span class="widget-metric" id="tilt-status">Standard (3D)</span>
+          </div>
+        </article>
+
+        <!-- Feature 3: Procedural Audio & Chimes -->
+        <article class="feature-card" id="feature-card-audio">
+          <div class="card-icon-wrapper">
+            <svg viewBox="0 0 24 24">
+              <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
+              <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.08"></path>
+            </svg>
+          </div>
+          <h3>Harmonic Web Audio Synthesis</h3>
+          <p>Zero external audio files required. Uses the Web Audio API oscillator nodes to generate ethereal pentatonic glass chimes on demand.</p>
+          <div class="interactive-widget">
+            <button class="widget-btn" id="btn-play-harmonic-chord">
+              <span>Play Celestial Chord</span>
+            </button>
+            <span class="widget-metric" id="harmonic-metric">432 Hz Pure</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Playground Nova Burst Action Banner -->
+    <section class="playground-banner" aria-labelledby="banner-heading">
+      <h2 id="banner-heading">Ready to ignite the atmosphere?</h2>
+      <p>Click below to unleash a high-density cosmic particle explosion across your screen, synchronized with synthesized acoustic harmonics.</p>
+      <button class="pulse-burst-trigger" id="master-burst-trigger">
+        ✦ Unleash Particle Supernova
+      </button>
+    </section>
+
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <div class="status-badge">
+        <span class="status-dot"></span>
+        <span>Aetheria Core Engine Connected</span>
+      </div>
+      <div>Designed with Precision &amp; Modern Web Aesthetics</div>
+      <div class="footer-meta">
+        <span>Pure HTML5 &bull; CSS3 &bull; JavaScript</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
+</body>
+</html>
